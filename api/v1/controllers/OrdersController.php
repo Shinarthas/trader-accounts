@@ -25,4 +25,14 @@ class OrdersController extends AuthApiController
 		}
 		ResponseRender::failure(ResponseRender::INTERNAL_SERVER_ERROR);
 	}
+	
+	public function actionCancel() {
+		if(!$order = Order::findOne($_POST['id']))
+			return ResponseRender::failure(ResponseRender::VALIDATION_ERROR, []);
+		
+		if($order->cancel())
+			return ResponseRender::success(['order_id'=>$order->id]);
+			
+		ResponseRender::failure(ResponseRender::INTERNAL_SERVER_ERROR);
+	}
 }
