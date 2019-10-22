@@ -26,10 +26,10 @@ class m191009_122619_market extends Migration
         $c=['name'=>'Trx Market','url'=>'https://trx.market/','class'=>'TronscanExchange','created_at'=>time()];
         $this->insert($tableName, $c);
 		
-		$c=['name'=>'Tron Trade','url'=>'https://trontrade.io/','created_at'=>time()];
+		$c=['name'=>'Tron Trade','url'=>'https://trontrade.io/','class'=>'TronscanExchange','created_at'=>time()];
         $this->insert($tableName, $c);
 		
-		$c=['name'=>'Binance','url'=>'https://binance.com/','created_at'=>time()];
+		$c=['name'=>'Binance','url'=>'https://binance.com/','class'=>'TronscanExchange','created_at'=>time()];
         $this->insert($tableName, $c);
 	}
 
