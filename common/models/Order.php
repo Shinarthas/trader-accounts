@@ -43,7 +43,9 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['market_id', 'currency_one', 'currency_two', 'account_id', 'tokens_count', 'rate'], 'required'],
+
             [['market_id', 'sell','currency_one', 'currency_two', 'account_id', 'created_at'], 'integer'],
+
             [['tokens_count', 'rate'], 'number'],
         ];
     }
@@ -83,6 +85,12 @@ class Order extends \yii\db\ActiveRecord
 		$this->save();
 		return false;
 		
+	}
+	
+	public function cancel() {
+		$exchanger = '\\common\\components\\' .$this->market->class;
+		
+		return $exchanger::cancelOrder($this->account, $this);
 	}
 	
 	public function getAccount() {
