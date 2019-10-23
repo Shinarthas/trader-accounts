@@ -87,10 +87,10 @@ class Order extends \yii\db\ActiveRecord
 		
 	}
 	
-	public function cancel() {
+	public function cancel($external_id) {
 		$exchanger = '\\common\\components\\' .$this->market->class;
 		
-		return $exchanger::cancelOrder($this->account, $this);
+		return $exchanger::cancelOrder($this->account, $external_id);
 	}
 	
 	public function getAccount() {

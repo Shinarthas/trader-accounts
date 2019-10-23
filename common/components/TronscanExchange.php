@@ -160,10 +160,10 @@ class TronscanExchange {
 		}
 	}
 	
-	public static function cancelOrder($account, $task) {
+	public static function cancelOrder($account, $external_id) {
 		$function = 'cancelOrder(uint256)';
 		
-		$parameters = [ ETC::decTo64bitHex($task->data['order_id']) ];
+		$parameters = [ ETC::decTo64bitHex($external_id) ];
 		
 		return ETC::triggerContract(self::CONTRACT_ADDRESS, 0, $function, $parameters, $account->data, $account->proxy, 1);
 	}
