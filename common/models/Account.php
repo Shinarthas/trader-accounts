@@ -31,7 +31,7 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'name', 'country', 'last_proxy_id', 'data_json', 'created_at'], 'required'],
+            [['type', 'name', 'country',  'data_json', 'created_at'], 'required'],
             [['type', 'last_proxy_id', 'created_at'], 'integer'],
             [['data_json'], 'string'],
             [['name', 'country'], 'string', 'max' => 255],
