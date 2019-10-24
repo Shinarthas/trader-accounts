@@ -41,4 +41,16 @@ class AutoController extends Controller
 		foreach(Proxy::find()->where(['speed'=>0])->all() as $p)
 			$p->check();
 	}
+	
+	public function actionClearAndFix() {
+		$proxy_count = Proxy::find()->select("COUNT(id) AS id")->scalar();
+		if($proxy_count == 0) {
+			foreach(Account::find()->all() as $account)
+			{
+				$account->last_proxy_id = 0;
+				$account->save();
+			}
+			Proxy::downloadList();
+		}
+	}
 }
