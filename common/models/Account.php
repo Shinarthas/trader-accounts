@@ -65,6 +65,18 @@ class Account extends \yii\db\ActiveRecord
     }
 	
 	public function getProxy() {
-		return null;
+		if($this->last_proxy_id == 0) 
+			$proxy = Proxy::getProxyByCountry($this->country);
+		 else 
+		{
+			$proxy = Proxy::getProxyById($this->last_proxy_id);
+			if(!$proxy OR $proxy->id==0 OR $proxy->errors>22)
+				$proxy = Proxy::getProxyByCountry($this->country);
+		}
+		
+		$this->last_proxy_id = $proxy->id;
+		$this->save();
+		
+		return $proxy->address;
 	}
 }
