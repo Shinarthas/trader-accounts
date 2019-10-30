@@ -75,14 +75,23 @@ class Order extends \yii\db\ActiveRecord
 		else
 			$result = $exchanger::buyOrder($this->main_currency, $this->second_currency, $this->tokens_count, $this->rate, $this->account);
 			
+		$proxy = Proxy::findOne($account->last_proxy_id);
+		
 		if($result) {
+			$proxy->errors = 0;
 			$this->status = self::STATUS_CREATED;
 			$this->save();
 			return true;
 		}
+		else
+			$proxy->errors++;
 		
 		$this->status = self::STATUS_ERROR;
 		$this->save();
+		
+			
+		$proxy->save();
+		
 		return false;
 		
 	}
