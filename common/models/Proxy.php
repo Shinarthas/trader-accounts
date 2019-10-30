@@ -133,7 +133,7 @@ class Proxy extends \yii\db\ActiveRecord
 	}
 	
 	public function check() {
-		if($this->errors > 22)
+		if($this->errors > 6)
 			return false;
 			
 		if(time() - $this->last_check < 300 AND $this->available == 1)
