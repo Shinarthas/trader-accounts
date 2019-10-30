@@ -13,8 +13,11 @@ use common\components\ApiRequest;
 class OrdersController extends AuthApiController
 {
 	public function actionCreate() {
-		$order = new Order;
-		$order->id = $_POST['id'];
+		
+		if(!$order = Order::findOne($_POST['id'])) {
+			$order = new Order;
+			$order->id = $_POST['id'];
+		}
 		$order->attributes = $_POST;
 		if(!$order->save())
 			return ResponseRender::failure(ResponseRender::VALIDATION_ERROR, $order->errors);

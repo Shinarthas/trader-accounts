@@ -6,6 +6,7 @@ use yii\helpers\Console;
 use yii\console\Controller;
 use common\models\Order;
 use common\models\Proxy;
+use common\models\Account;
 
 class AutoController extends Controller
 {
